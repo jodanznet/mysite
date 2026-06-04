@@ -3,152 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JODANZ.NET</title>
+    <title>JODANZ.NET | An archive of things worth noticing.</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg-color: #0a0a0a;
-            --text-main: #f5f5f5;
-            --text-muted: #888888;
-            --font-serif: "Times New Roman", "游明朝", "Yu Mincho", "Hiragino Mincho ProN", serif;
-            --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", sans-serif;
+        /* -----------------------------------------
+         * JODANZ.NET v1.5 - VINTAGE ZINE EDITION
+         * Inspired by 60s-70s Record Sleeves, Silk-screen, and Independent Zines.
+         * ----------------------------------------- */
+        
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Oswald:wght@500;700&family=Noto+Serif+JP:wght@600;900&family=Noto+Sans+JP:wght@700;900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
+
+        /* 古紙・生成りの温かみのあるベージュ背景 */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-serif);
-            line-height: 1.8;
-            letter-spacing: 0.08em;
-            -webkit-font-smoothing: antialiased;
+            background-color: #e6dfd3; 
+            color: #1a1917;
+            font-family: 'Courier Prime', 'Noto Serif JP', serif;
+            padding: 40px 20px;
+            line-height: 1.6;
+            letter-spacing: 0.05em;
         }
-        /* 画面全体に微細な粒子（グラニューノイズ）を載せる特殊エフェクト */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
-            pointer-events: none; z-index: 9999;
+
+        /* 独立系ZINEのザラついた外枠を表現（立体的な黒シャドウ） */
+        .zine-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 4px solid #1a1917;
+            background-color: #ebdcb9; 
+            padding: 50px 30px;
+            box-shadow: 12px 12px 0px #1a1917;
+            position: relative;
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 100px 30px; }
-        header { margin-bottom: 120px; }
-        .site-title { font-size: 24px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-main); text-decoration: none; display: inline-block; margin-bottom: 15px; }
-        .site-statement { font-size: 13px; color: var(--text-muted); letter-spacing: 0.15em; font-style: italic; }
-        section { margin-bottom: 140px; }
-        .section-label { font-family: var(--font-sans); font-size: 11px; text-transform: uppercase; letter-spacing: 0.4em; color: var(--text-muted); margin-bottom: 35px; display: block; border-bottom: 1px solid #1a1a1a; padding-bottom: 8px; }
-        
-        /* 写真の魅せ方（モノクロからホバーで色が出る、またはハイコントラストを維持） */
-        .image-box { width: 100%; margin-bottom: 30px; background: #111; overflow: hidden; }
-        .image-box img { width: 100%; height: auto; display: block; filter: grayscale(100%) contrast(115%) brightness(95%); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-        .image-box:hover img { filter: grayscale(0%) contrast(100%) brightness(100%); transform: scale(1.01); }
-        .image-caption { font-size: 11px; color: var(--text-muted); text-align: right; margin-top: 12px; font-family: var(--font-sans); letter-spacing: 0.1em; }
-        
-        /* ポッドキャスト枠 */
-        .podcast-card { background: #111; padding: 40px 30px; border: 1px solid #1a1a1a; }
-        .podcast-title { font-size: 18px; letter-spacing: 0.2em; margin-bottom: 12px; }
-        .podcast-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 30px; font-family: var(--font-sans); max-width: 550px; line-height: 1.8; }
-        .podcast-link { display: inline-block; font-family: var(--font-sans); font-size: 12px; color: var(--text-main); text-decoration: none; border: 1px solid #333; padding: 12px 24px; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s; }
-        .podcast-link:hover { background: var(--text-main); color: var(--bg-color); }
-        
-        /* ギャラリー用の2段テーブルレイアウト（WeasyPrint/シンプルCSS互換） */
-        .gallery-table { display: table; width: 100%; border-collapse: separate; border-spacing: 20px 0; margin-top: -20px; }
-        .gallery-row { display: table-row; }
-        .gallery-cell { display: table-cell; width: 50%; vertical-align: top; }
-        @media (max-width: 640px) {
-            .gallery-table, .gallery-row, .gallery-cell { display: block; width: 100%; }
-            .gallery-cell { margin-bottom: 40px; }
+
+        /* 60年代のレコードレーベルのような肉厚なタイポグラフィ */
+        header {
+            text-align: center;
+            border-bottom: 4px solid #1a1917;
+            padding-bottom: 40px;
+            margin-bottom: 50px;
         }
-        
-        /* フィールドノーツ */
-        .note-item { margin-bottom: 30px; padding-bottom: 20px; }
-        .note-date { font-family: var(--font-sans); font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 8px; }
-        .note-text { font-size: 14px; color: #ccc; }
-        
-        /* アバウト */
-        .about-statement { font-size: 18px; margin-bottom: 25px; color: #fff; font-style: italic; line-height: 1.8; }
-        .about-desc { color: var(--text-muted); font-family: var(--font-sans); font-size: 13px; max-width: 550px; }
-        footer { margin-top: 160px; text-align: center; font-family: var(--font-sans); font-size: 10px; color: var(--text-muted); letter-spacing: 0.2em; }
+
+        .site-title {
+            font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.0;
+            color: #1a1917;
+            text-decoration: none;
+            display: inline-block;
+            transform: scaleY(1.1); 
+        }
+
+        .site-title:hover {
+            color: #d14933; /* 昔のインクのような朱色/赤のアクセント */
+        }
+
+        .site-statement {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-top: 15px;
+            color: #4a4741;
+            font-weight: 700;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        /* タイトルラベルをあえて少し傾けて、手刷りの「版ズレ」感を演出 */
+        .section-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            background-color: #1a1917;
+            color: #ebdcb9;
+            padding: 4px 12px;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            transform: rotate(-1deg); 
+        }
+
+        /* 写真を荒々しいハイコントラスト・モノクローム（2階調化風）に強制変換 */
+        .image-container {
+            border: 4px solid #1a1917;
+            background-color: #1a1917;
+            position: relative;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 8px 8px 0px #1a1917;
+        }
+
+        .image-container img {
+            width: 100%;
+            display: block;
+            filter: grayscale(100%) contrast(150%); 
+            transition: filter 0.4s ease;
+        }
+
+        /* マウスを乗せる（タップする）と、じわっと元の写真の階調に戻るギミック */
+        .image-container:hover img {
+            filter: grayscale(0%) contrast(110%);
+        }
+
+        .image-caption {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.0rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 12px;
+            border-left: 4px solid #d14933;
+            padding-left: 10px;
+        }
+
+        /* ポッドキャストカード（ヴィンテージ雑誌の広告枠のような佇まい） */
+        .podcast-card {
+            border: 4px solid #1a1917;
+            background-color: #dfd2b2; 
+            padding: 30px;
+            box-shadow: 8px 8px 0px #1a1917;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        /* アナログ盤のセンターレーベルを模した丸バッジ */
+        .podcast-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: #d14933; 
+            color: #ebdcb9;
+            border: 3px solid #1a1917;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transform: rotate(12deg);
+            box-shadow: 3px 3px 0px #1a1917;
+        }
+
+        .podcast-title {
+            font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+        }
+
+        .podcast-desc {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2b2925;
+            text-align: justify;
+            margin-bottom: 25px;
+        }
+
+        .podcast-link {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: #ebdcb9;
+            background-color: #1a1917;
+            text-decoration: none;
+            padding: 10px 24px;
+            display: inline-block;
+            border: 3px solid #1a1917;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
+        }
+
+        .podcast-link:hover {
+            background-color: #d14933;
+            color: #ebdcb9;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #1a1917;
+        }
+
+        /* 2段ギャラリーをテーブルレイアウトでパキッと構築（WeasyPrint/ブラウザ両対応） */
+        .gallery-grid {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 20px 0px;
+        }
+
+        .gallery-item {
+            display: table-cell;
+            width: 50%;
+            vertical-align: top;
+        }
+
+        footer {
+            text-align: center;
+            border-top: 4px dashed #1a1917;
+            padding-top: 30px;
+            margin-top: 70px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: #5c5850;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 15px 10px; }
+            .zine-wrapper { padding: 30px 15px; }
+            .site-title { font-size: 2.8rem; }
+            .gallery-grid, .gallery-item { display: block; width: 100%; }
+            .gallery-item { margin-bottom: 35px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
+    <div class="zine-wrapper">
+
         <!-- HEADER -->
         <header>
             <a href="#" class="site-title">JODANZ.NET</a>
             <div class="site-statement">An archive of things worth noticing.</div>
         </header>
 
-        <!-- ① TOP IMAGE (OBSERVATION #01) -->
+        <!-- ❶ TOP IMAGE SECTION (Observation #01) -->
         <section>
-            <div class="image-box">
-                <!-- ここに1枚目のモノクロ路地の写真を当てはめます -->
+            <div class="section-label">Observation #01</div>
+            <div class="image-container">
+                <!-- 先ほど無事表示されたPNG形式のパスをそのまま維持 -->
                 <img src="images/hero.png" alt="Observation #01">
             </div>
-            <div class="image-caption">Observation #01 — Street, Perspective.</div>
+            <div class="image-caption">Observation #01 — Street. Perspective.</div>
         </section>
 
-        <!-- ② NO ONE KNOWS -->
-        <section id="no-one-knows">
-            <span class="section-label">Audio Project</span>
+        <!-- ❷ AUDIO PROJECT SECTION -->
+        <section>
+            <div class="section-label">Audio Project</div>
             <div class="podcast-card">
+                <div class="podcast-badge">INFO</div>
                 <h3 class="podcast-title">NO ONE KNOWS</h3>
                 <p class="podcast-desc">
-                    世界のアンダーレポートされた領域、情報リテラシー、認知戦、そして語られることのない地政学的フレーム。日常のノイズの裏側に潜む通奏低音を観測するポッドキャストプログラム。
+                    世界のアンダーレポートされた領域、情報リテラシー、認知戦、 tender して語られることのない地政学的フレーム。日常のノイズの裏側に潜む通奏低音を観測するポッドキャストプログラム。
                 </p>
-                <!-- URLは後からいつでも書き換えられます -->
                 <a href="https://open.spotify.com/" target="_blank" class="podcast-link">Listen on Spotify</a>
             </div>
         </section>
 
-        <!-- ③ PHOTOGRAPHY (GALLERY) -->
-        <section id="photography">
-            <span class="section-label">Visual Archive</span>
+        <!-- ❸ ARCHIVE GALLERY (Observation #02 & #03) -->
+        <section style="margin-bottom: 20px;">
+            <div class="section-label">Captured Fragments</div>
             
-            <div class="gallery-table">
-                <div class="gallery-row">
-                    <!-- 左カラム：2枚目の祭りの写真 -->
-                    <div class="gallery-cell">
-                        <div class="image-box">
-                            <img src="images/gallery1.jpg" alt="Observation #02">
-                        </div>
-                        <div class="image-caption" style="text-align: left;">Observation #02 — Heat, Movement.</div>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item">
+                    <div class="image-container">
+                        <img src="images/gallery1.jpg" alt="Observation #02">
                     </div>
-                    <!-- 右カラム：3枚目のマルシェの写真（あえて少し下にずらしてリズムを出す） -->
-                    <div class="gallery-cell" style="padding-top: 60px;">
-                        <div class="image-box">
-                            <img src="images/gallery2.jpg" alt="Observation #03">
-                        </div>
-                        <div class="image-caption" style="text-align: left;">Observation #03 — Hands, Exchange.</div>
-                    </div>
+                    <div class="image-caption">Observation #02 — Shadows & Ink.</div>
                 </div>
+                
+                <div class="gallery-item">
+                    <div class="image-container">
+                        <img src="images/gallery2.jpg" alt="Observation #03">
+                    </div>
+                    <div class="image-caption">Observation #03 — The Raw Flow.</div>
+                </div>
+
             </div>
         </section>
 
-        <!-- ④ FIELD NOTES -->
-        <section id="field-notes">
-            <span class="section-label">Field Notes</span>
-            <div class="note-item">
-                <span class="note-date">2026.06.04</span>
-                <p class="note-text">
-                    土地を手に入れ、旗を立てた。ここはプロフィールを綺麗に並べる場所ではなく、世界をどう見ているかを記録する場所だ。カメラのファインダーを通すこと、音を採集すること、すべては同じ「観測」の変奏に過ぎない。
-                </p>
-            </div>
-        </section>
-
-        <!-- ⑤ ABOUT -->
-        <section id="about">
-            <span class="section-label">Observer</span>
-            <div class="about-statement">
-                Photographer. Writer. Podcaster.<br>
-                Based in Kagoshima, Japan.<br>
-                Creator of NO ONE KNOWS.
-            </div>
-            <div class="about-desc">
-                独自のファインダーで切り取るストリート、重低音と環境音が混ざり合う音響空間、そしてメディアのフレームを解体する視線。日々の中に埋もれる「気付く価値のあるものたち」の断片を採集している。
-            </div>
-        </section>
-
+        <!-- FOOTER -->
         <footer>
-            &copy; 2026 JODANZ.NET All Rights Reserved.
+            &copy; 2026 JODANZ.NET / YAMASHITA JODAN. ALL RIGHTS RESERVED.
         </footer>
 
     </div>
