@@ -1,33 +1,69 @@
-<style>
-    body { background: #000; color: #fff; }
-    
-    /* 記号をタイル状に並べる */
-    .symbol-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 20px;
-        padding: 50px;
-    }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>JODANZ.NET | ARCHIVE OF CHAOS</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            overflow: hidden; /* 画面端まで使い切る */
+            font-family: 'Courier Prime', monospace;
+        }
 
-    .symbol-item {
-        font-size: 2rem;
-        cursor: pointer;
-        transition: transform 0.3s;
-        border: 1px solid #333; /* 無機質な境界線 */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        aspect-ratio: 1/1;
-    }
+        .chaos-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
 
-    .symbol-item:hover {
-        transform: scale(1.1);
-        border-color: #fff; /* ざわめき感 */
-    }
-</style>
+        .symbol {
+            position: absolute;
+            cursor: crosshair;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            user-select: none;
+            /* サイズをランダムに見せるための可変指定 */
+            font-size: clamp(1rem, 5vw, 6rem); 
+            opacity: 0.6;
+            filter: contrast(200%);
+        }
 
-<div class="symbol-grid">
-    <div class="symbol-item">✜</div>
-    <div class="symbol-item">⧓</div>
-    <div class="symbol-item">◈</div>
+        /* ざわめき（マウスホバー）時の演出 */
+        .symbol:hover {
+            opacity: 1;
+            transform: rotate(45deg) scale(1.4);
+            color: #ff0000;
+            filter: invert(1);
+            text-shadow: 0 0 10px #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chaos-container" id="chaos">
+        <!-- 記号の密度をJSで生成する -->
     </div>
+
+    <script>
+        const symbols = ['✜', '⧓', '◈', '☾', '👁', '☤', '⍟', '⚙', '⚚', '⚛', '⌾', '⎈', '⧔', '✠', '☿', '☯', '⚝', '☀', '⌁', '⧫', '⧮'];
+        const container = document.getElementById('chaos');
+        
+        // 記号を画面いっぱいに撒き散らす
+        for (let i = 0; i < 60; i++) {
+            const sym = document.createElement('div');
+            sym.className = 'symbol';
+            sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            // 座標をランダム配置
+            sym.style.top = Math.random() * 95 + '%';
+            sym.style.left = Math.random() * 95 + '%';
+            
+            // 動きに深みを出すためのディレイ
+            sym.style.transitionDelay = Math.random() * 0.5 + 's';
+            
+            container.appendChild(sym);
+        }
+    </script>
+</body>
+</html>
