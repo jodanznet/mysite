@@ -247,10 +247,11 @@
             opacity: 1;
         }
 
+       /* 【修正】写真への色干渉を防ぐため、枠線を黄色からクリーンな「白（#ffffff）」へ変更 */
         .lightbox-content {
             max-width: 90%;
             max-height: 85%;
-            border: 1.5px solid #e3b02b; /* 拡大時も細い黄色のフレームで引き締める */
+            border: 1.5px solid #ffffff; /* ここを白にチューニング */
             box-shadow: 0 0 30px rgba(0,0,0,0.7);
             transform: scale(0.95);
             transition: transform 0.3s ease;
