@@ -6,8 +6,8 @@
     <title>JODANZ.NET | An archive of things worth noticing.</title>
     <style>
         /* -----------------------------------------
-         * JODANZ.NET v1.5 - VINTAGE ZINE EDITION
-         * Inspired by 60s-70s Record Sleeves, Silk-screen, and Independent Zines.
+         * JODANZ.NET v1.6 - VINTAGE ZINE REFINED
+         * Refened borders, 60s-70s Pop-Art Spot Yellow & Crimson Red accents
          * ----------------------------------------- */
         
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Oswald:wght@500;700&family=Noto+Serif+JP:wght@600;900&family=Noto+Sans+JP:wght@700;900&display=swap');
@@ -18,57 +18,71 @@
             padding: 0;
         }
 
-        /* 古紙・生成りの温かみのあるベージュ背景 */
+        /* 外側の背景：少し深みのある古紙の色 */
         body {
-            background-color: #e6dfd3; 
+            background-color: #d1ca9e; 
             color: #1a1917;
             font-family: 'Courier Prime', 'Noto Serif JP', serif;
-            padding: 40px 20px;
+            padding: 40px 15px;
             line-height: 1.6;
             letter-spacing: 0.05em;
         }
 
-        /* 独立系ZINEのザラついた外枠を表現（立体的な黒シャドウ） */
+        /* 
+         * 外枠フレームの太さを 4px ➔ 1.5px に変更！ 
+         * 参考画像の繊細な zine の手触りに合わせてシャープに。
+         */
         .zine-wrapper {
             max-width: 800px;
             margin: 0 auto;
-            border: 4px solid #1a1917;
-            background-color: #ebdcb9; 
+            border: 1.5px solid #1a1917;
+            background-color: #ebdcb9; /* 内側の明るい生成りペーパー */
             padding: 50px 30px;
-            box-shadow: 12px 12px 0px #1a1917;
+            box-shadow: 8px 8px 0px #1a1917; 
             position: relative;
         }
 
-        /* 60年代のレコードレーベルのような肉厚なタイポグラフィ */
+        /* ヘッダー */
         header {
             text-align: center;
-            border-bottom: 4px solid #1a1917;
+            border-bottom: 1.5px solid #1a1917;
             padding-bottom: 40px;
             margin-bottom: 50px;
+            position: relative;
         }
 
         .site-title {
             font-family: 'Oswald', 'Noto Sans JP', sans-serif;
-            font-size: 4.5rem;
+            font-size: 4.8rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
             line-height: 1.0;
             color: #1a1917;
             text-decoration: none;
             display: inline-block;
-            transform: scaleY(1.1); 
+            transform: scaleY(1.1);
+            position: relative;
         }
 
-        .site-title:hover {
-            color: #d14933; /* 昔のインクのような朱色/赤のアクセント */
+        /* 【ポイント】ロゴの後ろに参考画像のような「黄色のベタ帯」をレイヤー配置 */
+        .site-title::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            right: -10px;
+            bottom: 5px;
+            height: 25px;
+            background-color: #e3b02b; /* レトロなスポットイエロー */
+            z-index: -1;
+            transform: rotate(-0.5deg);
         }
 
         .site-statement {
             font-family: 'Courier Prime', monospace;
             font-size: 1.1rem;
             font-style: italic;
-            margin-top: 15px;
+            margin-top: 20px;
             color: #4a4741;
             font-weight: 700;
         }
@@ -77,90 +91,91 @@
             margin-bottom: 60px;
         }
 
-        /* タイトルラベルをあえて少し傾けて、手刷りの「版ズレ」感を演出 */
+        /* 【ポイント】見出しを「黄ベタ＋黒文字」に変更して視線を集める */
         .section-label {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             text-transform: uppercase;
-            background-color: #1a1917;
-            color: #ebdcb9;
-            padding: 4px 12px;
+            background-color: #e3b02b; 
+            color: #1a1917;
+            padding: 4px 14px;
             display: inline-block;
             margin-bottom: 25px;
             font-weight: 700;
-            letter-spacing: 0.1em;
-            transform: rotate(-1deg); 
+            letter-spacing: 0.08em;
+            border: 1.5px solid #1a1917;
+            transform: rotate(-0.8deg); /* 手刷りの絶妙な傾き */
         }
 
-        /* 写真を荒々しいハイコントラスト・モノクローム（2階調化風）に強制変換 */
+        /* 写真フレームも 1.5px で洗練 */
         .image-container {
-            border: 4px solid #1a1917;
+            border: 1.5px solid #1a1917;
             background-color: #1a1917;
             position: relative;
             margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 8px 8px 0px #1a1917;
+            box-shadow: 6px 6px 0px #1a1917;
         }
 
         .image-container img {
             width: 100%;
             display: block;
-            filter: grayscale(100%) contrast(150%); 
+            filter: grayscale(100%) contrast(140%);
             transition: filter 0.4s ease;
         }
 
-        /* マウスを乗せる（タップする）と、じわっと元の写真の階調に戻るギミック */
         .image-container:hover img {
             filter: grayscale(0%) contrast(110%);
         }
 
+        /* 【ポイント】キャプション左の線を「朱色に近い赤」にしてポイントに */
         .image-caption {
             font-family: 'Courier Prime', monospace;
-            font-size: 1.0rem;
+            font-size: 0.95rem;
             font-weight: 700;
             text-transform: uppercase;
             margin-top: 12px;
-            border-left: 4px solid #d14933;
+            border-left: 3.5px solid #cc3a25; /* スポットクリムゾンレッド */
             padding-left: 10px;
+            color: #1a1917;
         }
 
-        /* ポッドキャストカード（ヴィンテージ雑誌の広告枠のような佇まい） */
+        /* ポッドキャストカード */
         .podcast-card {
-            border: 4px solid #1a1917;
+            border: 1.5px solid #1a1917;
             background-color: #dfd2b2; 
-            padding: 30px;
-            box-shadow: 8px 8px 0px #1a1917;
+            padding: 35px 30px;
+            box-shadow: 6px 6px 0px #1a1917;
             margin-top: 10px;
             position: relative;
         }
 
-        /* アナログ盤のセンターレーベルを模した丸バッジ */
+        /* 赤い丸バッジ（参考画像の丸パーツを踏襲） */
         .podcast-badge {
             position: absolute;
-            top: -15px;
-            right: 20px;
-            background-color: #d14933; 
+            top: -18px;
+            right: 25px;
+            background-color: #cc3a25; 
             color: #ebdcb9;
-            border: 3px solid #1a1917;
+            border: 1.5px solid #1a1917;
             border-radius: 50%;
-            width: 55px;
-            height: 55px;
+            width: 58px;
+            height: 58px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Oswald', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: bold;
-            transform: rotate(12deg);
+            transform: rotate(10deg);
             box-shadow: 3px 3px 0px #1a1917;
         }
 
         .podcast-title {
             font-family: 'Oswald', 'Noto Sans JP', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-transform: uppercase;
             letter-spacing: -0.01em;
         }
@@ -171,32 +186,34 @@
             font-weight: 600;
             color: #2b2925;
             text-align: justify;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
+        /* 【ポイント】ボタンも「黄ベタ」にすることでヴィンテージの雑誌広告感を強調 */
         .podcast-link {
             font-family: 'Oswald', sans-serif;
             font-size: 1.1rem;
             text-transform: uppercase;
-            color: #ebdcb9;
-            background-color: #1a1917;
+            color: #1a1917;
+            background-color: #e3b02b; 
             text-decoration: none;
             padding: 10px 24px;
             display: inline-block;
-            border: 3px solid #1a1917;
+            border: 1.5px solid #1a1917;
             font-weight: bold;
             letter-spacing: 0.05em;
+            box-shadow: 4px 4px 0px #1a1917;
             transition: all 0.2s ease;
         }
 
         .podcast-link:hover {
-            background-color: #d14933;
+            background-color: #cc3a25; /* ホバーすると赤に切り替わるギミック */
             color: #ebdcb9;
-            transform: translate(-2px, -2px);
-            box-shadow: 4px 4px 0px #1a1917;
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #1a1917;
         }
 
-        /* 2段ギャラリーをテーブルレイアウトでパキッと構築（WeasyPrint/ブラウザ両対応） */
+        /* 2カラムギャラリー */
         .gallery-grid {
             display: table;
             width: 100%;
@@ -213,7 +230,7 @@
 
         footer {
             text-align: center;
-            border-top: 4px dashed #1a1917;
+            border-top: 1.5px dashed #1a1917;
             padding-top: 30px;
             margin-top: 70px;
             font-family: 'Courier Prime', monospace;
@@ -245,7 +262,6 @@
         <section>
             <div class="section-label">Observation #01</div>
             <div class="image-container">
-                <!-- 先ほど無事表示されたPNG形式のパスをそのまま維持 -->
                 <img src="images/hero.png" alt="Observation #01">
             </div>
             <div class="image-caption">Observation #01 — Street. Perspective.</div>
@@ -258,7 +274,7 @@
                 <div class="podcast-badge">INFO</div>
                 <h3 class="podcast-title">NO ONE KNOWS</h3>
                 <p class="podcast-desc">
-                    世界のアンダーレポートされた領域、情報リテラシー、認知戦、 tender して語られることのない地政学的フレーム。日常のノイズの裏側に潜む通奏低音を観測するポッドキャストプログラム。
+                    世界のアンダーレポートされた領域、情報リテラシー、認知戦、そして語られることのない地政学的フレーム。日常のノイズの裏側に潜む通奏低音を観測するポッドキャストプログラム。
                 </p>
                 <a href="https://open.spotify.com/" target="_blank" class="podcast-link">Listen on Spotify</a>
             </div>
