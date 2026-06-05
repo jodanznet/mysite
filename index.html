@@ -4,24 +4,44 @@
     <meta charset="UTF-8">
     <title>JODANZ.NET</title>
     <style>
-        body { margin: 0; background: #000; overflow: hidden; height: 100vh; }
+        body { margin: 0; background: #000; overflow: hidden; height: 100vh; display: flex; justify-content: center; align-items: center; }
         
-        /* 画像がない場合に備えて、背景が見えるようにする */
         .wrapper { 
-            width: 100vw; height: 100vh; 
-            background: url('web.jpg') no-repeat center center; 
+            position: relative; 
+            width: 100vw; 
+            height: 100vh; 
+            /* ここを修正：imageフォルダを指定 */
+            background: url('image/web.jpg') no-repeat center center; 
             background-size: contain; 
-            border: 5px solid red; /* 画像が表示されない場合、赤い枠で囲って存在を確認 */
         }
+
+        .hotspot { position: absolute; cursor: pointer; border: 1px solid transparent; }
         
-        .debug-text { color: red; font-size: 20px; text-align: center; padding-top: 50px; }
+        .listen { top: 40%; left: 10%; width: 25%; height: 30%; }
+        .gallery { top: 55%; left: 15%; width: 10%; height: 15%; }
+        .blog { top: 75%; left: 15%; width: 10%; height: 20%; }
+
+        .ear-gimmick { position: absolute; top: 20%; left: 60%; width: 20%; height: 50%; cursor: help; }
+        .ear-gimmick::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 50px; height: 50px; border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%; opacity: 0; pointer-events: none;
+        }
+        .ear-gimmick:hover::after { animation: ripple 1.5s ease-out infinite; }
+        
+        @keyframes ripple {
+            0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(10); }
+        }
     </style>
 </head>
 <body>
 
     <div class="wrapper">
-        <div class="debug-text">画像が表示されなければ、web.jpgファイルが同じフォルダにあるか確認してください</div>
-        <a href="https://your-podcast-url.com" style="position:absolute; top:40%; left:10%; width:25%; height:30%; border:1px solid yellow;"></a>
+        <a href="https://your-podcast-url.com" class="hotspot listen"></a>
+        <a href="gallery.html" class="hotspot gallery"></a>
+        <a href="blog.html" class="hotspot blog"></a>
+        <div class="ear-gimmick"></div>
     </div>
 
 </body>
