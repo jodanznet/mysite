@@ -2,68 +2,47 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>JODANZ.NET | ARCHIVE OF CHAOS</title>
+    <title>JODANZ.NET</title>
     <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            overflow: hidden; /* 画面端まで使い切る */
-            font-family: 'Courier Prime', monospace;
-        }
+        body { margin: 0; background: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        
+        /* 画像全体を覆うコンテナ */
+        .wrapper { position: relative; width: 100vw; height: 100vh; background: url('web.jpg') no-repeat center center; background-size: contain; }
 
-        .chaos-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
+        /* リンク用ボタンの透明エリア */
+        .hotspot { position: absolute; cursor: pointer; border: 1px solid transparent; }
+        
+        /* 拡声器 (Listen) */
+        .listen { top: 40%; left: 10%; width: 25%; height: 30%; }
+        /* カメラ (Gallery) */
+        .gallery { top: 55%; left: 15%; width: 10%; height: 15%; }
+        /* 新聞 (Blog) */
+        .blog { top: 75%; left: 15%; width: 10%; height: 20%; }
 
-        .symbol {
-            position: absolute;
-            cursor: crosshair;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            user-select: none;
-            /* サイズをランダムに見せるための可変指定 */
-            font-size: clamp(1rem, 5vw, 6rem); 
-            opacity: 0.6;
-            filter: contrast(200%);
+        /* 耳のギミックエリア */
+        .ear-gimmick { position: absolute; top: 20%; left: 60%; width: 20%; height: 50%; cursor: help; }
+        .ear-gimmick::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 50px; height: 50px; border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%; opacity: 0; pointer-events: none;
         }
-
-        /* ざわめき（マウスホバー）時の演出 */
-        .symbol:hover {
-            opacity: 1;
-            transform: rotate(45deg) scale(1.4);
-            color: #ff0000;
-            filter: invert(1);
-            text-shadow: 0 0 10px #fff;
+        .ear-gimmick:hover::after { animation: ripple 1.5s ease-out infinite; }
+        
+        @keyframes ripple {
+            0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(10); }
         }
     </style>
 </head>
 <body>
 
-    <div class="chaos-container" id="chaos">
-        <!-- 記号の密度をJSで生成する -->
+    <div class="wrapper">
+        <a href="https://your-podcast-url.com" class="hotspot listen"></a>
+        <a href="gallery.html" class="hotspot gallery"></a>
+        <a href="blog.html" class="hotspot blog"></a>
+        
+        <div class="ear-gimmick"></div>
     </div>
 
-    <script>
-        const symbols = ['✜', '⧓', '◈', '☾', '👁', '☤', '⍟', '⚙', '⚚', '⚛', '⌾', '⎈', '⧔', '✠', '☿', '☯', '⚝', '☀', '⌁', '⧫', '⧮'];
-        const container = document.getElementById('chaos');
-        
-        // 記号を画面いっぱいに撒き散らす
-        for (let i = 0; i < 60; i++) {
-            const sym = document.createElement('div');
-            sym.className = 'symbol';
-            sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            
-            // 座標をランダム配置
-            sym.style.top = Math.random() * 95 + '%';
-            sym.style.left = Math.random() * 95 + '%';
-            
-            // 動きに深みを出すためのディレイ
-            sym.style.transitionDelay = Math.random() * 0.5 + 's';
-            
-            container.appendChild(sym);
-        }
-    </script>
 </body>
 </html>
