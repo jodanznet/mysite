@@ -4,31 +4,35 @@
     <meta charset="UTF-8">
     <title>JODANZ.NET</title>
     <style>
-        body { margin: 0; background: #000; overflow: hidden; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        body { margin: 0; background: #000; overflow: hidden; height: 100vh; }
         
         .wrapper { 
             position: relative; 
             width: 100vw; 
             height: 100vh; 
-            /* ここを修正：imageフォルダを指定 */
-            background: url('images/web.jpg') no-repeat center center; 
-            background-size: contain; 
+            /* 念のため直接的なパスを指定 */
+            background-image: url('images/web.jpg'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
         }
 
-        .hotspot { position: absolute; cursor: pointer; border: 1px solid transparent; }
+        /* リンクの場所を確認するための仮枠（動いたら border: 0 にしてください） */
+        .hotspot { position: absolute; border: 2px solid red; }
         
-        .listen { top: 40%; left: 10%; width: 25%; height: 30%; }
-        .gallery { top: 55%; left: 15%; width: 10%; height: 15%; }
-        .blog { top: 75%; left: 15%; width: 10%; height: 20%; }
+        /* パーツ配置 (パーセンテージで指定) */
+        .listen { top: 40%; left: 5%; width: 20%; height: 25%; }
+        .gallery { top: 50%; left: 15%; width: 10%; height: 10%; }
+        .blog { top: 70%; left: 10%; width: 15%; height: 20%; }
+        .ear-gimmick { position: absolute; top: 20%; left: 60%; width: 25%; height: 50%; border: 2px solid blue; }
 
-        .ear-gimmick { position: absolute; top: 20%; left: 60%; width: 20%; height: 50%; cursor: help; }
+        /* 波紋ギミック */
         .ear-gimmick::after {
             content: ''; position: absolute; top: 50%; left: 50%;
-            width: 50px; height: 50px; border: 2px solid rgba(255, 255, 255, 0.4);
+            width: 50px; height: 50px; border: 2px solid white;
             border-radius: 50%; opacity: 0; pointer-events: none;
         }
         .ear-gimmick:hover::after { animation: ripple 1.5s ease-out infinite; }
-        
         @keyframes ripple {
             0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
             100% { opacity: 0; transform: translate(-50%, -50%) scale(10); }
@@ -36,13 +40,11 @@
     </style>
 </head>
 <body>
-
     <div class="wrapper">
-        <a href="https://your-podcast-url.com" class="hotspot listen"></a>
+        <a href="https://podcast-url.com" class="hotspot listen"></a>
         <a href="gallery.html" class="hotspot gallery"></a>
         <a href="blog.html" class="hotspot blog"></a>
         <div class="ear-gimmick"></div>
     </div>
-
 </body>
 </html>
