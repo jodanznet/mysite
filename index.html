@@ -10,29 +10,36 @@
             position: relative; 
             width: 100vw; 
             height: 100vh; 
-            /* 念のため直接的なパスを指定 */
             background-image: url('images/web.jpg'); 
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center center;
         }
 
-        /* リンクの場所を確認するための仮枠（動いたら border: 0 にしてください） */
-        .hotspot { position: absolute; border: 2px solid red; }
+        /* リンク用エリア（枠線は消しました） */
+        .hotspot { position: absolute; cursor: pointer; }
         
-        /* パーツ配置 (パーセンテージで指定) */
-        .listen { top: 40%; left: 5%; width: 20%; height: 25%; }
-        .gallery { top: 50%; left: 15%; width: 10%; height: 10%; }
-        .blog { top: 70%; left: 10%; width: 15%; height: 20%; }
-        .ear-gimmick { position: absolute; top: 20%; left: 60%; width: 25%; height: 50%; border: 2px solid blue; }
+        /* 拡声器(Listen) */
+        .listen { top: 40%; left: 5%; width: 25%; height: 30%; }
+        /* カメラ(Gallery) */
+        .gallery { top: 55%; left: 15%; width: 10%; height: 15%; }
+        /* 新聞(Blog) */
+        .blog { top: 75%; left: 10%; width: 15%; height: 20%; }
 
-        /* 波紋ギミック */
+        /* 耳のギミック */
+        .ear-gimmick { position: absolute; top: 20%; left: 60%; width: 25%; height: 50%; cursor: help; }
+        
+        /* 波紋の発生源を左下にずらした設定 */
         .ear-gimmick::after {
-            content: ''; position: absolute; top: 50%; left: 50%;
-            width: 50px; height: 50px; border: 2px solid white;
+            content: ''; position: absolute; 
+            top: 60%; left: 40%; 
+            width: 50px; height: 50px; 
+            border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%; opacity: 0; pointer-events: none;
         }
+        
         .ear-gimmick:hover::after { animation: ripple 1.5s ease-out infinite; }
+        
         @keyframes ripple {
             0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
             100% { opacity: 0; transform: translate(-50%, -50%) scale(10); }
@@ -44,6 +51,7 @@
         <a href="https://podcast-url.com" class="hotspot listen"></a>
         <a href="gallery.html" class="hotspot gallery"></a>
         <a href="blog.html" class="hotspot blog"></a>
+        
         <div class="ear-gimmick"></div>
     </div>
 </body>
